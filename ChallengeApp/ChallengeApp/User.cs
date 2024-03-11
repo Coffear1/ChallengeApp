@@ -21,9 +21,14 @@
         }
 
 
-        public void AddScore(int number)            // Metoda
+        public void AddScore(int score)            // Metoda na dodanie oceny 
         {
-            this.score.Add(number);
+            this.score.Add(score);
+        }
+
+        public void RemoveScore(int score)         // Metoda na obniżenie oceny 
+        { 
+            this.score.Add(score * (-1));
         }
     }
 }
