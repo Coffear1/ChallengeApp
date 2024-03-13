@@ -17,7 +17,7 @@
 
 
 
-        public string Login { get; private set; }           // Pola - parametry opisujące obiekt
+        public string Login { get; private set; }           // Pola (propercje) - parametry opisujące obiekt
         public string Password { get; private set; }
         public int Result
         {

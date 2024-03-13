@@ -73,14 +73,14 @@ namespace ChallengeApp.Tests
         public void TestOfTypesReference()
         {
             // arrange 
-            var employee1 = new Employee("Adam", "Kowalski", 45);
-            var employee2 = new Employee("Adam", "Kowalski", 45);
+            var employee1 = new Employee("Adam", "Kowalski");
+            var employee2 = new Employee("Adam", "Kowalski");
 
             //assert 
             Assert.AreNotEqual(employee1, employee2);
             Assert.AreEqual(employee1.Name, employee2.Name);
             Assert.AreEqual(employee1.Surname, employee2.Surname);
-            Assert.AreEqual(employee1.Age, employee2.Age);
+           
         }
     }
 }
