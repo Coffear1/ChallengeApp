@@ -21,13 +21,13 @@
         {
             var employee = new Employee("Adam", "Kowalski");
 
-            employee.AddGrade(58);
-            employee.AddGrade(53);
-            employee.AddGrade(-5);
+            employee.AddGrade(52);
+            employee.AddGrade(43);
+            employee.AddGrade(20);
 
             var statistic = employee.GetStatistics();
 
-            Assert.AreEqual(-5, statistic.Min);
+            Assert.AreEqual(20, statistic.Min); 
         }
 
         [Test]
@@ -42,10 +42,34 @@
             var statistic = employee.GetStatistics();
 
             Assert.AreEqual(58, statistic.Max);
-
-
-
         }
 
+        [Test]
+        public void TestAverageLetter()
+        {
+            var employee = new Employee();
+
+            employee.AddGrade(65);
+            employee.AddGrade(100);
+            employee.AddGrade(20);
+
+            var statistic = employee.GetStatistics();
+
+            Assert.AreEqual('B', statistic.AverageLetter);
+        }
+
+        [Test]
+        public void TestAddGradeWitchChar()
+        {
+            var employee = new Employee();
+
+            employee.AddGrade('A');
+            employee.AddGrade('b');
+            employee.AddGrade('D');
+
+            var statistic = employee.GetStatistics();
+
+            Assert.AreEqual(73, 33, statistic.Average);
+        }
     }
 }
