@@ -18,6 +18,7 @@ namespace ChallengeApp;
     public char Sex { get; private set; }
     
     public void AddGrade(float grade)
+    
     {
         if (grade >= 0 && grade <= 100)                              
         {                                                          
@@ -31,7 +32,6 @@ namespace ChallengeApp;
 
     public void AddGrade(string grade)
     {
-       
         switch (grade) 
         {
             case "6":

@@ -1,24 +1,17 @@
-﻿
-using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
-    public class Employee : IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
         private List<float> grades = new List<float>();
-        
-        public Employee(string name, string surname, char sex)
+
+        public EmployeeInMemory(string name, string surname)
+            : base(name, surname)
         {
-            this.Name = name;
-            this.Surname = surname;
-            this.Sex = sex;
+
         }
 
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-        public char Sex { get; private set; }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)                              // WALIDACJA - weryfikacja czy dane są poprawne.
             {                                                           // w tym wypadku musimy dopilnować aby można było dodawać oceny 
@@ -30,9 +23,37 @@ namespace ChallengeApp
             }
         }
 
-        public void AddGrade(char grade)
+        public override void AddGrade(string grade)
         {
-            switch(grade)
+            if (float.TryParse(grade, out float result))                 // TryParse - sprawdza czy sparsowany parametr na pewno się zgadza 
+            {                                                           // np. czy string jest "5" a nie "Adam"
+                this.AddGrade(result);
+            }
+            else if (char.TryParse(grade, out char resultLetter))
+            {
+                this.AddGrade(resultLetter);
+            }
+            else
+            {
+                throw new Exception("String is not float");
+            }
+        }
+
+        public override void AddGrade(int grade)
+        {
+            float floatValue = grade;
+            this.AddGrade(floatValue);
+        }
+
+        public override void AddGrade(double grade)
+        {
+            float floatValue = (float)grade;
+            this.AddGrade(floatValue);
+        }
+
+        public override void AddGrade(char grade)
+        {
+            switch (grade)
             {
                 case 'A':
                 case 'a':
@@ -59,46 +80,7 @@ namespace ChallengeApp
             }
         }
 
-        public void AddGrade(string grade)
-        {
-            if (float.TryParse(grade, out float result))                 // TryParse - sprawdza czy sparsowany parametr na pewno się zgadza 
-            {                                                           // np. czy string jest "5" a nie "Adam"
-                this.AddGrade(result);
-            }
-            else if (char.TryParse(grade, out char resultLetter))
-            {
-                this.AddGrade(resultLetter);
-            }
-            else
-            {
-                throw new Exception("String is not float");
-            }
-        }
-
-        public void AddGrade(int grade)
-        {
-            float floatValue = grade;
-            this.AddGrade(floatValue);
-        }
-
-        public void AddGrade(uint grade)
-        {
-            float floatValue = (float)grade;
-            this.AddGrade(floatValue);
-        }
-
-        public void AddGrade(long grade)
-        {
-            float floatValue = (float)grade;
-            this.AddGrade(floatValue);
-        }
-        public void AddGrade(double grade)
-        {
-            float floatValue = (float)grade;
-            this.AddGrade(floatValue);
-        }
-
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
 
@@ -116,7 +98,7 @@ namespace ChallengeApp
 
             statistics.Average = statistics.Average / this.grades.Count;
 
-            switch (statistics.Average) 
+            switch (statistics.Average)
             {
                 case var average when average >= 80:
                     statistics.AverageLetter = 'A';
@@ -135,8 +117,6 @@ namespace ChallengeApp
                     break;
             }
             return statistics;
-        }                   
+        }
     }
 }
-
-
