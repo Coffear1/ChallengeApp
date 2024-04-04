@@ -1,8 +1,8 @@
-﻿
-using ChallengeApp;
-namespace ChallengeApp;
+﻿using ChallengeApp;
 
-    public class Supervisor : IEmployee
+
+
+public class Supervisor : IEmployee
 {
     private List<float> grades = new List<float>();
 
@@ -16,7 +16,9 @@ namespace ChallengeApp;
     public string Name { get; private set; }
     public string Surname { get; private set; }
     public char Sex { get; private set; }
-    
+
+    public event EmployeeBase.GradeAddedDelegate GradeAdded;
+
     public void AddGrade(float grade)
     
     {
@@ -32,6 +34,18 @@ namespace ChallengeApp;
 
     public void AddGrade(string grade)
     {
+        if (float.TryParse(grade, out float result))                 // TryParse - sprawdza czy sparsowany parametr na pewno się zgadza 
+        {                                                           // np. czy string jest "5" a nie "Adam"
+            this.AddGrade(result);
+        }
+        else if (char.TryParse(grade, out char resultLetter))
+        {
+            this.AddGrade(resultLetter);
+        }
+        else
+        {
+            throw new Exception("String is not float");
+        }
         switch (grade) 
         {
             case "6":
@@ -123,7 +137,7 @@ namespace ChallengeApp;
 
     public void AddGrade(char grade)
     {
-        throw new NotImplementedException();
+        
     }
 
     public Statistics GetStatistics()

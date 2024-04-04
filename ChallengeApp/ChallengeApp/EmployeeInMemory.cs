@@ -2,6 +2,8 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
+        public override event GradeAddedDelegate GradeAdded;
+
         private List<float> grades = new List<float>();
 
         public EmployeeInMemory(string name, string surname)
@@ -15,7 +17,12 @@
         {
             if (grade >= 0 && grade <= 100)                              // WALIDACJA - weryfikacja czy dane są poprawne.
             {                                                           // w tym wypadku musimy dopilnować aby można było dodawać oceny 
-                this.grades.Add(grade);                                 // tylko z zakresu 0-100
+                this.grades.Add(grade);                                  // tylko z zakresu 0-100
+
+                if (GradeAdded != null)                                    // Miejsce gdzie event został odpalony 
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {

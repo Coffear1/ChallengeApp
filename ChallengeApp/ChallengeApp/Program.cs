@@ -1,19 +1,19 @@
 ﻿using ChallengeApp;
 
-Console.WriteLine("Witamy w programie do oceny Kierowników");
+
+Console.WriteLine("Witamy w programie do oceny Pracowników");
 Console.WriteLine("========================================");
 Console.WriteLine();
 
-var employee = new EmployeeInFile("Krzysiek", "Stebel");
+var employee = new EmployeeInMemory("Krzysiek", "Stebel");
+employee.GradeAdded += EmployeeGradeAdded;
+                                                                                // Subskrybowanie na zdarzenia
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nowa ocenę");
+}
 
-employee.AddGrade(34);
-employee.AddGrade(54);
 
-
-
-
-
-/*
 while (true)
 {
     Console.WriteLine("Podaj ocenę pracownika");
@@ -25,7 +25,7 @@ while (true)
 
     try
     {
-        supervisor.AddGrade(input);
+        employee.AddGrade(input);
     }
     catch (Exception mistake)
     {
@@ -34,12 +34,20 @@ while (true)
 }
 
 Console.WriteLine();
-var statistics = supervisor.GetStatistics();
+var statistics = employee.GetStatistics();
 Console.WriteLine($"Average: {statistics.Average:N2}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
 Console.WriteLine($"AverageLetter: {statistics.AverageLetter}");
-*/
+
+
+
+
+
+
+
+
+
 
 
 

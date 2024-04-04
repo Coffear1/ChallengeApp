@@ -5,7 +5,7 @@
         [Test]
         public void TestAverageResult()
         {
-            var employee = new Employee("Adam", "Kowalski");
+            var employee = new EmployeeInMemory("Adam", "Kowalski");
 
             employee.AddGrade(58);
             employee.AddGrade(53);
@@ -19,7 +19,7 @@
         [Test]
         public void TestMinResult()
         {
-            var employee = new Employee("Adam", "Kowalski");
+            var employee = new EmployeeInMemory("Adam", "Kowalski");
 
             employee.AddGrade(52);
             employee.AddGrade(43);
@@ -33,7 +33,7 @@
         [Test]
         public void TestMaxResult()
         {
-            var employee = new Employee("Adam", "Kowalski");
+            var employee = new EmployeeInMemory("Adam", "Kowalski");
 
             employee.AddGrade(58);
             employee.AddGrade(53);
@@ -47,7 +47,7 @@
         [Test]
         public void TestAverageLetter()
         {
-            var employee = new Employee();
+            var employee = new EmployeeInMemory("Adam", "Kowalski");
 
             employee.AddGrade(65);
             employee.AddGrade(100);
@@ -61,7 +61,7 @@
         [Test]
         public void TestAddGradeWitchChar()
         {
-            var employee = new Employee();
+            var employee = new EmployeeInMemory("Adam", "Kowalski");
 
             employee.AddGrade('A');
             employee.AddGrade('b');
