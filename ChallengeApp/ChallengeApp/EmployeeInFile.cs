@@ -2,9 +2,10 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
+        private const string fileName = "grades.txt";
+
         public override event GradeAddedDelegate GradeAdded;
 
-        private const string fileName = "grades.txt";
         public EmployeeInFile(string name, string surname)
             : base(name, surname)
         {
@@ -91,45 +92,24 @@
         public override Statistics GetStatistics()
         {
             var result = new Statistics();
-            result.Min = float.MaxValue;
-            result.Max = float.MinValue;
-            result.Average = 0;
-            var counter = 0;
 
             if(File.Exists(fileName))
             {
+                var counter = 0;
+
                 using (var reader = File.OpenText(fileName))
                 {
-                    var line = reader.ReadLine();
+                    var line = reader.ReadLine(); 
+
                     while (line != null)
                     {
                         var number = float.Parse(line);
-                        result.Min = Math.Min(result.Min, number);  
-                        result.Max = Math.Max(result.Max, number);
-                        result.Average = result.Average + number;
-                        counter ++;
+                        result.AddGrade(number);
+                        counter++;
+                        line = reader.ReadLine();
+                        
                     }
                 }
-            }
-            result.Average = result.Average / counter;
-
-            switch (result.Average)
-            {
-                case var average when average >= 80:
-                    result.AverageLetter = 'A';
-                    break;
-                case var average when average >= 60:
-                    result.AverageLetter = 'B';
-                    break;
-                case var average when average >= 40:
-                    result.AverageLetter = 'C';
-                    break;
-                case var average when average >= 20:
-                    result.AverageLetter = 'D';
-                    break;
-                default:
-                    result.AverageLetter = 'E';
-                    break;
             }
             return result;
         }

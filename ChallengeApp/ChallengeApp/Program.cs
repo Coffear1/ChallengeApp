@@ -5,7 +5,7 @@ Console.WriteLine("Witamy w programie do oceny Pracowników");
 Console.WriteLine("========================================");
 Console.WriteLine();
 
-var employee = new EmployeeInMemory("Krzysiek", "Stebel");
+var employee = new EmployeeInFile("Krzysiek", "Stebel");
 employee.GradeAdded += EmployeeGradeAdded;
                                                                                 // Subskrybowanie na zdarzenia
 void EmployeeGradeAdded(object sender, EventArgs args)
